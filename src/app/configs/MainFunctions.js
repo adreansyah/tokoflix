@@ -16,3 +16,8 @@ export const Pricing = (n) => {
     }
     return price;
 }
+
+export const Splitingdate = (str)=>{   
+    let result = str.split("-");
+    return result[0];
+}
