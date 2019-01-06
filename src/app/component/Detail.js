@@ -3,26 +3,31 @@ import MDSpinner from "react-md-spinner";
 import {DetailMovie} from '../configs/config';
 import {Pricing} from '../configs/MainFunctions';
 
-class Detail extends React.Component {
+class Detail extends React.Component {    
     constructor(){
         super();
         this.state = {
             data:[],
             loading:true,            
         }
+        this._isMounted = false;
     }
 
-    componentWillMount(){          
-        let { page } = this.props.match.params;      
-        DetailMovie(page).then((res) => setTimeout(() => { 
-            this.setState(() => ({
-                data:res,
-                loading: false
-            }))
-        }, 2000));          
+    componentWillMount(){        
+        this._isMounted = true;  
+        let { page } = this.props.match.params;    
+        if (this._isMounted) {  
+            DetailMovie(page).then((res) => setTimeout(() => { 
+                this.setState(() => ({
+                    data:res,
+                    loading: false
+                }))
+            }, 2000));   
+        }       
     }
 
     componentWillUnmount(){
+        this._isMounted = false;
         console.log('STOP');
     }
     render(){        
@@ -31,14 +36,16 @@ class Detail extends React.Component {
             <section className="content">
                 {
                     (loading=== true)?<div className="loader text-center"><MDSpinner/></div>
-                    :<ViewsDetail data={data}/> 
+                    :<ViewsDetail data={data} history={this}/> 
                 }
             </section>            
         )
     }
 }
 
-const ViewsDetail = (props)=>{                           
+const ViewsDetail = (props)=>{   
+    // // console.log(props.history.props)    
+    // let {history}  = props.history.props;                    
     return(
         <div>
             <div className="row margin">    
@@ -48,9 +55,8 @@ const ViewsDetail = (props)=>{
                 <PriceList data={props.data}/>                                                         
             </div>
             <hr/>
-            <div className="row margin">
-                <div className="bg-red">asdasd</div>
-            </div>
+            <div className="row margin">         
+            </div>            
         </div>
 
     )

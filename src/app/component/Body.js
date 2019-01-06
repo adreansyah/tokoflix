@@ -9,28 +9,29 @@ class Body extends React.Component {
             page:1,
             data:[],          
             message:'not at bottom',
-            isLoading: false,
-            isMounted: false,
+            isLoading: false,            
         };
         this._isMounted  = false;
         this.onScroll    = this.onScroll.bind(this); 
         this.handleClick = this.handleClick.bind(this);    
+        this._isMounted = false;
     }
 
-    componentWillMount(){   
-        DiscoverMovie(this.state.page).then((res) => this.setState(
-            {
-                data: res.results,    
-                isLoading: false,    
-                isMounted: true,        
-            }
-        ));                
-        this.state.isMounted;
+    componentWillMount(){  
+        this._isMounted = true;  
+        if (this._isMounted) {
+            DiscoverMovie(this.state.page).then((res) => this.setState(
+                {
+                    data: res.results,    
+                    isLoading: false,                        
+                }
+            ));     
+        }                    
         window.addEventListener('scroll', this.onScroll, false);
     }
 
     componentWillUnmount(){     
-        this.state.isMounted;
+        this._isMounted = false;
         window.addEventListener('scroll', this.onScroll, false);
     }
 
