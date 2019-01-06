@@ -13,6 +13,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i, 
+        loader: "file-loader?name=/public/icons/[name].[ext]"
       }
     ]
   },
@@ -22,7 +26,7 @@ module.exports = {
   
   output: {
     path: path.resolve(__dirname, '/dist'),
-    // publicPath: '/',
+    publicPath: '/',
     filename: 'bundle.js',   
   },
   plugins: [

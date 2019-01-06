@@ -10,9 +10,36 @@ body {
   overflow-x: hidden;
 }
 
+img.bg {
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.title-list{
+  padding: 0;
+  height: 50px;
+}
+.loader {
+  width: 120px;
+  height: 120px;
+  margin:auto;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  position:fixed;
+}
+
 .pad{
-  padding: 10px;
   font-size: 12px;
+  padding: 15px;
+  background: #141414;
+  color: white;
 }
 .border-list{
   border: 1px solid #8080802e;
@@ -62,6 +89,7 @@ body {
 
 .cont-im {
   position: relative;
+  border: 2px solid #1e3d57;
 }
 
 .image-list {
@@ -84,6 +112,12 @@ body {
   text-align: center;
 }
 
+.price-detail{
+  font-size: 30px;
+}
+.synopsis{
+  padding: 0px 0px 0px 20px;
+}
 .cont-im:hover .image-list {
   opacity: 0.3;
 }
@@ -92,11 +126,26 @@ body {
   opacity: 1;
 }
 
+.ml-rating-detail{
+  border-radius: 0;
+  color: #ebebeb;
+  background: rgba(39,59,89,.7);
+  font-size: 25px;
+  font-weight: 600;
+  height: 38px;
+  line-height: normal;
+  padding: 4px 2px 4px 4px;
+  text-align: left;
+  float: left;
+  display: inline-block;
+}
+
 .text {
-  background-color: #10100F;
+  background-color: #0000009e;
   color: white;
   font-size: 16px;
   padding: 16px 32px;
+  margin: -60px;
 }
 
 .font-acc{
@@ -4406,9 +4455,9 @@ table.text-center th {
  * General: Miscellaneous
  * ----------------------
  */
-.pad {
+/* .pad {
   padding: 10px;
-}
+} */
 .margin {
   margin: 10px;
 }
