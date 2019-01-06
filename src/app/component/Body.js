@@ -14,7 +14,6 @@ class Body extends React.Component {
         this._isMounted  = false;
         this.onScroll    = this.onScroll.bind(this); 
         this.handleClick = this.handleClick.bind(this);    
-        this._isMounted = false;
     }
 
     componentWillMount(){  
@@ -85,7 +84,8 @@ class Body extends React.Component {
     render() {                                                      
         return (
             <section className="content">                      
-                <div className="row margin">                                          
+                <div className="row margin">                     
+                    <div className="clearfix"></div>                                                           
                     <Layout data={this}/>
                 </div> 
                 {
@@ -101,38 +101,40 @@ const Layout = (props) =>{
     let {data} = props.data.state;     
     let state  = props.data;   
     let URI    = 'https://image.tmdb.org/t/p/w500';
-    return(
-        <div className="col-md-12">              
-            {                        
-                data.map((item, index) => (                            
-                    <div className="col-md-3" key={index}>  
-                        <div className="margin border-list red-tooltip" data-html="true" data-placement="top" data-toggle="tooltip" title={ "Synopsis : "+item.overview }>
-                            <div className="cont-im">
-                                <div className="rating-durasi">
-                                    <span className="ml-rating">
-                                        <i className="fa fa-star text-yellow"></i> {item.vote_average}
-                                    </span>
-                                </div>
-                                    <img src={URI+item.backdrop_path} className="image-list" width="auto" height="300" />
-                                    <div className="price">
-                                        <span className="ml-price">
-                                        Price: {Pricing(item.vote_average)}
+    return(        
+        <div>                            
+            <div className="col-md-12">              
+                {                        
+                    data.map((item, index) => (                            
+                        <div className="col-md-3" key={index}>  
+                            <div className="margin border-list red-tooltip" data-html="true" data-placement="top" data-toggle="tooltip" title={ "Synopsis : "+item.overview }>
+                                <div className="cont-im">
+                                    <div className="rating-durasi">
+                                        <span className="ml-rating">
+                                            <i className="fa fa-star text-yellow"></i> {item.vote_average}
                                         </span>
                                     </div>
-                                <div onClick={() => state.handleClick(item.id,item.title)} className="middle">
-                                    <div className="cursor text"><i className="fa fa-play text-aqua" aria-hidden="true"></i></div>
-                                </div>
-                                <div className="text-center pad">
-                                    <div className="title-list">
-                                        <div className="pad"><small><b>{item.title+' ('+Splitingdate(item.release_date)+')'}</b></small></div>
+                                        <img src={URI+item.backdrop_path} className="image-list" width="auto" height="300" />
+                                        <div className="price">
+                                            <span className="ml-price">
+                                            Price: {Pricing(item.vote_average)}
+                                            </span>
+                                        </div>
+                                    <div onClick={() => state.handleClick(item.id,item.title)} className="middle">
+                                        <div className="cursor text"><i className="fa fa-play text-aqua" aria-hidden="true"></i></div>
+                                    </div>
+                                    <div className="text-center pad">
+                                        <div className="title-list">
+                                            <div className="pad"><small><b>{item.title+' ('+Splitingdate(item.release_date)+')'}</b></small></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>   
-                    </div>                          
-                ))
-            }                                                                                                                                             
-        </div>  
+                            </div>   
+                        </div>                          
+                    ))
+                }                                                                                                                                             
+            </div>  
+        </div>
     )
 }
 

@@ -13,8 +13,8 @@ class HelloWorld extends React.Component {
           <img className="bg" src={'http://localhost:8080/public/icons/bg.png'} />
           <Header history={history}/>     
             <Switch>                
-              <Route exact path="/" component={()=><Body history={history}/>} />  
-              <Route path="/:page" component={Detail}/>                        
+              <Route exact path="/" component={()=><Body history={history}/>} /> 
+              <Route path="/:page" component={Detail} />                          
             </Switch>
         </div>
       </Router>
