@@ -10,7 +10,7 @@ from root folder :
 
 ```bash
 $ cd /{YOUR_PATH_FOLDER}/
-git clone "https://github.com/adreansyah/tokoflix.git"
+$ git clone "https://github.com/adreansyah/tokoflix.git"
 $ cd tokoflix/
 ```
 
