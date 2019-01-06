@@ -1,8 +1,15 @@
 # Tokoflix
 
-## Installation
+## Rquirement
 
-For setup this mini project, you need Node v8.10.0, NPM 3.5.2, webpack 4,and Linux Environtment.
+For setup this mini project, you need : 
+
+1. Node v8.10.0. 
+2. NPM 3.5.2.
+3. webpack 4.
+4. Linux Environtment.
+
+## Installation
 
 from root folder :
 
