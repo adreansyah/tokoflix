@@ -5,12 +5,16 @@ import Detail from './component/Detail';
 import { Router, Route, Link, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 const history = createHistory();
+let Base_Url = window.location.href;
+let arr = Base_Url.split("/");
+let Url_Result = arr[0] + "//" + arr[2];
+
 class HelloWorld extends React.Component {
-  render() {
+  render() {    
     return (
       <Router history={history}>        
         <div className="wrapper">        
-          <img className="bg" src={'http://localhost:8080/public/icons/bg.png'} />
+          <img className="bg" src={''+Url_Result+'/public/icons/bg.png'} />
           <Header history={history}/>     
             <Switch>                
               <Route exact path="/" component={()=><Body history={history}/>} /> 
