@@ -1,33 +1,34 @@
 import React from 'react'; 
 import {DiscoverMovie} from '../configs/config';
-import {Pricing,Splitingdate} from '../configs/MainFunctions';
+import {Pricing,Splitingdate,Replacingstring} from '../configs/MainFunctions';
 
 class Body extends React.Component {
     constructor() {
-        super();
+        super();       
         this.state = {
             page:1,
             data:[],          
             message:'not at bottom',
             isLoading: false,
+            isMounted: false,
         };
-        this.onScroll       = this.onScroll.bind(this);    
+        this._isMounted  = false;
+        this.onScroll       = this.onScroll.bind(this); 
+        this.handleClick       = this.handleClick.bind(this);    
     }
 
-    componentWillMount(){
+    componentWillMount(){   
         DiscoverMovie(this.state.page).then((res) => this.setState(
             {
                 data: res.results,    
-                isLoading: false,            
+                isLoading: false,    
+                isMounted: true,        
             }
-        ));        
-    }
-
-    componentDidMount(){
+        ));                
         window.addEventListener('scroll', this.onScroll, false);
     }
 
-    componentWillUnmount(){
+    componentWillUnmount(){     
         window.addEventListener('scroll', this.onScroll, false);
     }
 
@@ -38,11 +39,13 @@ class Body extends React.Component {
         const docHeight    = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
         const windowBottom = windowHeight + window.pageYOffset;
 
-        if (windowBottom >= docHeight) {
+        if (windowBottom >= docHeight) {            
             this.setState({
                 page:this.state.page +1,
                 isLoading: false,
             });            
+            let {history} = this.props;        
+            history.push('/?page='+this.state.page+'');
             DiscoverMovie(this.state.page).then((res) => {                                
                 const nextUsers = res.results.map(val => ({
                     adult: val.adult,
@@ -70,9 +73,18 @@ class Body extends React.Component {
                 });
             })              
         }               
-      } 
-  
-    render() {           
+    } 
+
+    handleClick (id,title){
+        let {history} = this.props;
+        let plug = Replacingstring(title)
+        history.push({
+            pathname: id,
+            search: '?query='+plug+'',
+        });        
+    }
+
+    render() {                 
         let {data} = this.state;
         let URI    = 'https://image.tmdb.org/t/p/w500';                      
         return (
@@ -94,7 +106,7 @@ class Body extends React.Component {
                                                Price: {Pricing(item.vote_average)}
                                             </span>
                                         </div>
-                                        <div className="middle">
+                                        <div onClick={() => this.handleClick(item.id,item.title)} className="middle">
                                             <div className="cursor text"><i className="fa fa-play text-aqua" aria-hidden="true"></i></div>
                                         </div>
                                         <div className="text-center pad">

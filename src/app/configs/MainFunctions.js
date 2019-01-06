@@ -21,3 +21,9 @@ export const Splitingdate = (str)=>{
     let result = str.split("-");
     return result[0];
 }
+
+export const Replacingstring = (string) =>{
+    let plug = string.replace(/[^a-zA-Z ]/g, "");
+    let result = plug.split(' ').join('-');
+    return result;
+}

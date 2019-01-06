@@ -12,12 +12,12 @@ body {
 
 .pad{
   padding: 10px;
+  font-size: 12px;
 }
 .border-list{
   border: 1px solid #8080802e;
   background: #ffffff;
-  color: #5b5962;
-  height: 215px;
+  color: #5b5962;  
 }
 
 .tooltip-arrow,

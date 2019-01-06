@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
@@ -20,15 +21,18 @@ module.exports = {
   },
   
   output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, '/dist'),
+    // publicPath: '/',
+    filename: 'bundle.js',   
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
+    publicPath: '/',
+    filename: 'bundle.js', 
     contentBase: './dist',
+    historyApiFallback: true,
     hot: true
   }
 };
