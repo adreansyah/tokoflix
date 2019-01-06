@@ -65,7 +65,7 @@ img.bg {
   line-height: normal;
   padding: 4px 2px 4px 4px;
   text-align: left;
-  float: left;
+  /* float: left; */
   display: inline-block;
 }
 .rating-durasi {
@@ -83,8 +83,15 @@ img.bg {
   line-height: normal;
   padding: 4px 2px 4px 4px;
   text-align: left;
-  float: left;
+  /* float: left; */
   display: inline-block;
+}
+
+.not-post{
+  position: absolute;
+  top: 8px;
+  right: 0px;
+  border-radius: 10px;
 }
 
 .cont-im {
@@ -136,7 +143,7 @@ img.bg {
   line-height: normal;
   padding: 4px 2px 4px 4px;
   text-align: left;
-  float: left;
+  /* float: left; */
   display: inline-block;
 }
 

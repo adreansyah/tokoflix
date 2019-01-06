@@ -22,6 +22,12 @@ class Header extends React.Component {
                     </div>
                     <div className="navbar-custom-menu pull-right">
                         <ul className="nav navbar-nav">
+                            <li className="cursor dropdown notifications-menu">
+                                <a className="cursor user user-menu font-acc">
+                                    <i className="fa fa-cart-plus fa-lg"></i>
+                                    <span className="label label-danger not-post">10</span>
+                                </a>
+                            </li>  
                             <li className="cursor">
                                 <a className="cursor user user-menu font-acc">
                                 Adreansyah <i className="fa fa-caret-down" aria-hidden="true"></i>

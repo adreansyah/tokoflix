@@ -30,10 +30,6 @@ class Body extends React.Component {
         window.addEventListener('scroll', this.onScroll, false);
     }
 
-    componentWillUnmount(){     
-        this._isMounted = false;
-        window.addEventListener('scroll', this.onScroll, false);
-    }
 
     onScroll() {
         const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
@@ -83,10 +79,7 @@ class Body extends React.Component {
     handleClick (id,title){
         let {history} = this.props;
         let plug = Replacingstring(title)
-        history.push({
-            pathname: id,
-            search: '?title='+plug+'',
-        });        
+        history.push('/'+id+'-'+plug+'');        
     }
 
     render() {                                                      

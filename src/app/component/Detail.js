@@ -22,7 +22,7 @@ class Detail extends React.Component {
                     data:res,
                     loading: false
                 }))
-            }, 2000));   
+            },2000));   
         }       
     }
 
@@ -43,9 +43,7 @@ class Detail extends React.Component {
     }
 }
 
-const ViewsDetail = (props)=>{   
-    // // console.log(props.history.props)    
-    // let {history}  = props.history.props;                    
+const ViewsDetail = (props)=>{                                      
     return(
         <div>
             <div className="row margin">    
@@ -149,6 +147,7 @@ const Indicator = ()=>{
             <div className="box box-danger box-solid">
                 <div className="box-body text-center text-red">                
                     <p>Click buy to collecting this movie</p>
+                    <p>You dont Have this movie in your collection</p>
                     <p><i className="fa fa-chevron-down"></i></p>
                 </div>                
             </div>
