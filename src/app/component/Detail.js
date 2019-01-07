@@ -2,6 +2,7 @@ import React from 'react';
 import MDSpinner from "react-md-spinner";
 import {DetailMovie} from '../configs/config';
 import {Pricing} from '../configs/MainFunctions';
+import OthersMovie from './OthersMovie';
 
 class Detail extends React.Component {    
     constructor(){
@@ -30,6 +31,7 @@ class Detail extends React.Component {
         this._isMounted = false;
         console.log('STOP');
     }
+    
     render(){        
         let {loading,data} = this.state;
         return(
@@ -43,22 +45,43 @@ class Detail extends React.Component {
     }
 }
 
-const ViewsDetail = (props)=>{                                      
+const ViewsDetail = (props)=>{       
+    // console.log(props.data);                                
     return(
         <div>
             <div className="row margin">    
                 <Poster data={props.data}/>   
-                <Summary data={props.data}/>                    
-                <Indicator/> 
-                <PriceList data={props.data}/>                                                         
+                <Summary data={props.data}/>    
+                <Saldo/> 
+                <PriceList data={props.data}/>                               
+                <Indicator/>                                                                                          
             </div>
-            <hr/>
-            <div className="row margin">         
+            <OthersTitle/>            
+            <div className="row margin">  
+                <OthersMovie id={props.data.id}/>       
             </div>            
         </div>
 
     )
 }
+const OthersTitle = ()=>{
+    return(
+        <div className="row margin"> 
+            <div className="col-md-4 col-md-offset-4">
+                <div className="box box-info box-solid">
+                    <div className="box-body text-center">                
+                        <div className="text-center">
+                            <div className="similiar-font">
+                            <i className="fa fa-film" aria-hidden="true"></i> similar Movie
+                            </div>
+                        </div>                  
+                    </div>                
+                </div>
+            </div> 
+        </div>
+    )
+}
+
 const Poster =(list) =>{   
     let {
         poster_path,
@@ -75,7 +98,7 @@ const Poster =(list) =>{
                                 <i className="fa fa-star text-yellow"></i> {vote_average}
                             </span>
                         </div>
-                        <img src={URI+poster_path} className="image-list" />
+                        <img src={URI+poster_path} className="image-list-detail" />
                     </div>
                 </div>
             </div>
@@ -134,7 +157,7 @@ const PriceList = (list)=>{
                     </div>
                 </div>
                 <div className="box-footer">
-                    <button className="btn bg-teal btn-block"><i className="fa fa-cart-plus"></i> <b>Buy</b></button>
+                    <button className="btn bg-teal btn-block"><i className="fa fa-cart-plus"></i> <b>BELI</b></button>
                 </div>
             </div>
         </div> 
@@ -145,10 +168,25 @@ const Indicator = ()=>{
     return(
         <div className="col-md-3">
             <div className="box box-danger box-solid">
-                <div className="box-body text-center text-red">                
-                    <p>Click buy to collecting this movie</p>
-                    <p>You dont Have this movie in your collection</p>
-                    <p><i className="fa fa-chevron-down"></i></p>
+                <div className="box-body text-center text-red">       
+                    <p><i className="fa fa-chevron-up"></i></p>         
+                    <p>Klik tombol beli untuk mengkoleksi film ini</p>
+                    <p>Kamu belum mempunyai film ini</p>
+                    <p> segera lakukan pembelian ! </p>                    
+                </div>                
+            </div>
+        </div> 
+    )
+}
+
+const Saldo = ()=>{
+    return(
+        <div className="col-md-3">
+            <div className="box box-success box-solid">
+                <div className="box-body text-center text-success">                
+                    <div className="text-center">
+                        <i className="fa fa-bank" aria-hidden="true"></i> <b> saldo anda :  100.000</b>
+                    </div>                  
                 </div>                
             </div>
         </div> 

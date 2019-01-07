@@ -21,13 +21,7 @@ class Header extends React.Component {
                         <a onClick={this.linkTo} className="cursor navbar-brand font-head">Toko <i className="fa fa-video-camera text-aqua"></i> Flix</a>
                     </div>
                     <div className="navbar-custom-menu pull-right">
-                        <ul className="nav navbar-nav">
-                            <li className="cursor dropdown notifications-menu">
-                                <a className="cursor user user-menu font-acc">
-                                    <i className="fa fa-bell-o"></i>
-                                    <span className="label label-danger not-post">3</span>
-                                </a>
-                            </li> 
+                        <ul className="nav navbar-nav">                            
                             <li className="cursor dropdown notifications-menu">
                                 <a className="cursor user user-menu font-acc">
                                     <i className="fa fa-cart-plus fa-lg"></i>
@@ -38,7 +32,7 @@ class Header extends React.Component {
                                 <a className="cursor user user-menu font-acc">
                                 Adreansyah <i className="fa fa-caret-down" aria-hidden="true"></i>
                                 </a>
-                            </li>                           
+                            </li>                                                        
                         </ul>
                     </div>
                 </div>

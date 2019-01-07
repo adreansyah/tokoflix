@@ -101,8 +101,7 @@ const Layout = (props) =>{
     let {data} = props.data.state;     
     let state  = props.data;   
     let URI    = 'https://image.tmdb.org/t/p/w500';
-    return(        
-        <div>                            
+    return(                                           
             <div className="col-md-12">              
                 {                        
                     data.map((item, index) => (                            
@@ -132,8 +131,7 @@ const Layout = (props) =>{
                             </div>   
                         </div>                          
                     ))
-                }                                                                                                                                             
-            </div>  
+                }                                                                                                                                                         
         </div>
     )
 }
