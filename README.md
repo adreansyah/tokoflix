@@ -7,11 +7,20 @@ For setup this mini project, you need :
 1. Node v8.10.0. 
 2. NPM 3.5.2.
 3. webpack 4.
-4. Linux Environtment.
 
 ## Installation
 
-from root folder :
+from root folder Windows :
+
+**BASH**
+
+```bash
+ cd C:\\{YOUR_PATH_FOLDER}/
+ git clone "https://github.com/adreansyah/tokoflix.git"
+ cd tokoflix/
+```
+
+from root folder Linux :
 
 **BASH**
 
