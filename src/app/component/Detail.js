@@ -105,7 +105,8 @@ const Poster =(list) =>{
         </div>
     )
 }
-const Summary = (list) =>{
+
+const Summary = (list) =>{    
     let {      
         original_title,
         overview,
@@ -113,7 +114,7 @@ const Summary = (list) =>{
         status,
         production_companies,
         tagline,      
-    } = list.data;
+    } = list.data;  
     return(
         <div className="col-md-6">
             <div className="box box-info">
@@ -137,7 +138,11 @@ const Summary = (list) =>{
                     <p> <i className="fa fa-location-arrow text-aqua"></i> <b>Overview : </b></p>
                     <p className="synopsis">{overview}</p>
                     <hr/>
-                    <p> <i className="fa fa-location-arrow  text-aqua"></i> <b>Production Company :</b> {production_companies[0].name+' & '+production_companies[1].name}</p>
+                    <p> <i className="fa fa-location-arrow  text-aqua"></i> <b>Production Company :</b> {
+                        production_companies.map(function(item){                                                          
+                            return  item.name + ', '
+                        }) 
+                    }</p>
                 </div>
             </div>
         </div> 
