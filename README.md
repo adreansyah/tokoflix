@@ -35,6 +35,7 @@ $ cd tokoflix/
 ```bash
 npm install
 npm start
+go to web browser : localhost:8080
 ```
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/adreansyah/tokoflix/master/LICENSE)

@@ -23,9 +23,9 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx','css'],   
   },
-  
   output: {
-    path: path.resolve(__dirname, '/dist'),
+      // path: path.resolve(__dirname, "build/"),
+    path: path.resolve(__dirname, 'dist/'),
     publicPath: '/',
     filename: 'bundle.js',   
   },
@@ -38,5 +38,8 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
     hot: true
+  },
+  performance: {
+    hints: process.env.NODE_ENV === 'production' ? "warning" : false
   }
 };
