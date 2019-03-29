@@ -20,8 +20,10 @@ module.exports = {
       }
     ]
   },
+  
   resolve: {
-    extensions: ['*', '.js', '.jsx','css'],   
+    extensions: ['*', '.ts', '.js', '.jsx','css'],   
+    
   },
   output: {
       // path: path.resolve(__dirname, "build/"),
@@ -39,6 +41,9 @@ module.exports = {
     historyApiFallback: true,
     hot: true
   },
+  // externals: {
+  //   'react': 'React'
+  // },
   performance: {
     hints: process.env.NODE_ENV === 'production' ? "warning" : false
   }

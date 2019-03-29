@@ -18,7 +18,7 @@ class HelloWorld extends React.Component {
           <Header history={history}/>     
             <Switch>                
               <Route exact path="/" component={()=><Body history={history}/>} /> 
-              <Route path="/:page" component={Detail} />                          
+              <Route exact path="/:page" component={Detail} />                          
             </Switch>
         </div>
       </Router>

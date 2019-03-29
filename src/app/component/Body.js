@@ -10,13 +10,13 @@ class Body extends React.Component {
             data:[],          
             message:'not at bottom',
             isLoading: false,            
-        };
+        };        
         this._isMounted  = false;
         this.onScroll    = this.onScroll.bind(this); 
         this.handleClick = this.handleClick.bind(this);    
-    }
+    }    
 
-    componentWillMount(){  
+    componentDidMount(){  
         this._isMounted = true;  
         if (this._isMounted) {
             DiscoverMovie(this.state.page).then((res) => this.setState(
@@ -29,7 +29,9 @@ class Body extends React.Component {
         window.addEventListener('scroll', this.onScroll, false);
     }
 
-
+    componentWillUnmount(){
+        console.log('STOP');
+    }
     onScroll() {
         const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
         const body         = document.body;
@@ -37,11 +39,13 @@ class Body extends React.Component {
         const docHeight    = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
         const windowBottom = windowHeight + window.pageYOffset;
 
-        if (windowBottom >= docHeight) {            
-            this.setState({
-                page:this.state.page +1,
+        if (windowBottom >= docHeight) {    
+            this.setState((prevState) => ({
+                page:prevState.page +1,
                 isLoading: false,
-            });            
+          
+            }));             
+
             let {history} = this.props;                    
             history.push({
                 search: '?page='+this.state.page+'',
@@ -100,6 +104,7 @@ class Body extends React.Component {
 const Layout = (props) =>{      
     let {data} = props.data.state;     
     let state  = props.data;   
+    console.log(state);
     let URI    = 'https://image.tmdb.org/t/p/w500';
     return(                                           
             <div className="col-md-12">                          

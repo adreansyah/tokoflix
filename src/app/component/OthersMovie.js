@@ -1,7 +1,6 @@
 import React from 'react'; 
 import {SameDetail} from '../configs/config';
-// import {Pricing} from '../configs/MainFunctions';
-import {Pricing,Splitingdate} from '../configs/MainFunctions';
+import {Pricing,Replacingstring,Splitingdate} from '../configs/MainFunctions';
 
 
 class OthersMovie extends React.Component {    
@@ -10,6 +9,7 @@ class OthersMovie extends React.Component {
         this.state = {
             data:[],                 
         }       
+        this.handleClick = this.handleClick.bind(this);   
     }
 
     componentWillMount(){       
@@ -18,12 +18,22 @@ class OthersMovie extends React.Component {
                 data: res.results,    
                 isLoading: false,                        
             }
-        ));    
+        ));            
     }
 
-    render(){                      
+    componentWillUnmount(){
+        console.log('STOP');
+    }
+
+    handleClick(id,title){                
+        let {history} = this.props.data.history.props;
+        let plug = Replacingstring(title)
+        history.push(''+id+'-'+plug+'');        
+        window.location.reload();                            
+    }
+
+    render(){                        
         let {data} = this.state;   
-        // console.log(data.length);           
         let URI    = 'https://image.tmdb.org/t/p/w500';     
         if(data.length === 0 ){
             return (
@@ -50,7 +60,7 @@ class OthersMovie extends React.Component {
                                                 Price: {Pricing(item.vote_average)}
                                                 </span>
                                             </div>
-                                        <div className="middle">
+                                        <div onClick={() => this.handleClick(item.id,item.title)} className="middle">
                                             <div className="cursor text"><i className="fa fa-play text-aqua" aria-hidden="true"></i></div>
                                         </div>
                                         <div className="text-center pad">

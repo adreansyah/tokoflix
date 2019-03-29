@@ -58,7 +58,7 @@ const ViewsDetail = (props)=>{
             </div>
             <OthersTitle/>            
             <div className="row margin">  
-                <OthersMovie id={props.data.id}/>       
+                <OthersMovie data={props} id={props.data.id}/>       
             </div>            
         </div>
 
