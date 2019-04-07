@@ -1,96 +1,67 @@
 import React from 'react'; 
 import {DiscoverMovie} from '../configs/config';
 import {Pricing,Splitingdate,Replacingstring} from '../configs/MainFunctions';
+import {connect} from 'react-redux';
+import { LoadScrollData } from '../../Action';
+import LazyLoad from 'react-lazy-load';
 
 class Body extends React.Component {
-    constructor() {
-        super();       
+    constructor(props) {
+        super(props);       
         this.state = {
             page:1,
             data:[],          
             message:'not at bottom',
             isLoading: false,            
         };        
-        this._isMounted  = false;
         this.onScroll    = this.onScroll.bind(this); 
         this.handleClick = this.handleClick.bind(this);    
     }    
 
-    componentDidMount(){  
-        this._isMounted = true;  
-        if (this._isMounted) {
-            DiscoverMovie(this.state.page).then((res) => this.setState(
-                {
-                    data: res.results,    
-                    isLoading: false,                        
-                }
-            ));     
-        }                    
+    componentDidMount(){                     
         window.addEventListener('scroll', this.onScroll, false);
+        this.props.LoadScrollData(this.state.page);
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps){
+        const {LoadScrollPage} = nextProps.LoadPage;
+        console.log(LoadScrollPage);
+        this.setState(
+            {
+                data: LoadScrollPage.items,    
+                isLoading: false,                        
+            }
+        )
     }
 
     componentWillUnmount(){
-        console.log('STOP');
+        window.removeEventListener("scroll", this.onScroll);
     }
+
     onScroll() {
         const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
         const body         = document.body;
         const html         = document.documentElement;
         const docHeight    = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
         const windowBottom = windowHeight + window.pageYOffset;
-
         if (windowBottom >= docHeight) {    
-            this.setState((prevState) => ({
-                page:prevState.page +1,
-                isLoading: false,
-          
-            }));             
-
-            let {history} = this.props;                    
-            history.push({
-                search: '?page='+this.state.page+'',
-            });  
-            DiscoverMovie(this.state.page).then((res) => {                                
-                const nextUsers = res.results.map(val => ({
-                    adult: val.adult,
-                    backdrop_path: val.backdrop_path,
-                    genre_ids: val.genre_ids,
-                    id: val.id,
-                    original_language: val.original_language,
-                    original_title: val.original_title,
-                    overview: val.overview,
-                    popularity: val.popularity,
-                    poster_path: val.poster_path,
-                    release_date: val.release_date,
-                    title: val.title,
-                    video: val.video,
-                    vote_average: val.vote_average,
-                    vote_count: val.vote_count
-                }));                          
-             
-                this.setState({    
-                  isLoading: false,         
-                  data:[
-                      ...this.state.data,
-                      ...nextUsers,
-                  ],
-                });
-            })              
+            this.props.LoadScrollData(this.state.page+1);           
         }               
     } 
 
     handleClick (id,title){
+        console.log(this.props);
         let {history} = this.props;
         let plug = Replacingstring(title)
         history.push('/'+id+'-'+plug+'');        
     }
 
-    render() {                                                      
+    render() {                                                    
         return (
             <section className="content">                      
                 <div className="row margin">                     
-                    <div className="clearfix"></div>                                                           
-                    <Layout data={this}/>
+                    <div className="clearfix"></div>                                 
+                        <Layout data={this}/>
                 </div> 
                 {
                 this.state.isLoading &&
@@ -104,7 +75,6 @@ class Body extends React.Component {
 const Layout = (props) =>{      
     let {data} = props.data.state;     
     let state  = props.data;   
-    console.log(state);
     let URI    = 'https://image.tmdb.org/t/p/w500';
     return(                                           
             <div className="col-md-12">                          
@@ -118,7 +88,9 @@ const Layout = (props) =>{
                                             <i className="fa fa-star text-yellow"></i> {item.vote_average}
                                         </span>
                                     </div>
-                                        <img src={URI+item.backdrop_path} className="image-list" width="auto" height="300" />
+                                        {/* <LazyLoad offsetVertical={150}>  */}
+                                            <img src={URI+item.backdrop_path} className="image-list" width="auto" height="300" />
+                                        {/* </LazyLoad> */}
                                         <div className="price">
                                             <span className="ml-price">
                                             Price: {Pricing(item.vote_average)}
@@ -141,4 +113,12 @@ const Layout = (props) =>{
     )
 }
 
-export default Body; 
+const mapStateToProps = (state)=>{
+    return {
+        LoadPage:state
+    }
+}
+const mapDispatchToProps = {
+    LoadScrollData
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Body); 

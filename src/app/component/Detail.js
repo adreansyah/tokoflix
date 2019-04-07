@@ -5,16 +5,17 @@ import {Pricing} from '../configs/MainFunctions';
 import OthersMovie from './OthersMovie';
 
 class Detail extends React.Component {    
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             data:[],
             loading:true,            
         }
         this._isMounted = false;
+        console.log(props)
     }
 
-    componentWillMount(){        
+    componentDidMount(){        
         this._isMounted = true;  
         let { page } = this.props.match.params;    
         if (this._isMounted) {  

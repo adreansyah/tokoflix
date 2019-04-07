@@ -3,11 +3,12 @@ import Header from './component/Header';
 import Body from './component/Body';
 import Detail from './component/Detail';
 import { Router, Route, Link, Switch } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
-const history = createHistory();
-let Base_Url = window.location.href;
-let arr = Base_Url.split("/");
-let Url_Result = arr[0] + "//" + arr[2];
+import { createBrowserHistory } from 'history';
+
+const history  = createBrowserHistory();
+const Base_Url   = window.location.href,
+    arr        = Base_Url.split("/"),
+    Url_Result = arr[0] + "//" + arr[2];
 
 class HelloWorld extends React.Component {
   render() {    
